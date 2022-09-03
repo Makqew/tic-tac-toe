@@ -4,17 +4,17 @@
 }
 
 #wrapper {
-    display: grid;
-    grid-template-columns: 1fr 2fr ;
-    width: 100vmax;
-    height: 60vh;
+    display: flex;
+    flex-direction: column;
 }
 .box {
     display: flex;
     flex-direction: column;
     background-color: antiquewhite;
+    width: 80%;
+    height: 60vh;
     padding: 48px;
-    margin: 48px;
+    margin: 48px auto;
 }
 
 .row {
@@ -26,10 +26,21 @@
 }
 
 .column {
-    background-color: black;
+    background-color: rgb(238, 205, 162);
     border: 1px solid white;
+    font-size: 96px;
+    padding: 24px;
+    text-align: center;
 }
 
 .column:hover {
+    background-color: rgb(221, 185, 138);
+    cursor: pointer;
+}
 
+button {
+    width: 25%;
+    height: 8vh;
+    font-size: 24px;
+    margin: 0 auto
 }
