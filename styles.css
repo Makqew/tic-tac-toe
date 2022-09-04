@@ -1,11 +1,23 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #wrapper {
     display: flex;
     flex-direction: column;
+}
+
+h1{
+    margin: 24px;
+    font-weight: 100;
+}
+
+#players {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0 auto;
 }
 .box {
     display: flex;
@@ -29,6 +41,7 @@
     background-color: rgb(238, 205, 162);
     border: 1px solid white;
     font-size: 96px;
+    font-weight: 700;
     padding: 24px;
     text-align: center;
 }
@@ -39,6 +52,7 @@
 }
 
 button {
+    display: none;
     width: 25%;
     height: 8vh;
     font-size: 24px;
