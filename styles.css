@@ -10,8 +10,10 @@
 }
 
 h1{
+    text-align: center;
     margin: 24px;
-    font-weight: 100;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 #players {
@@ -19,7 +21,16 @@ h1{
     font-weight: 700;
     margin: 0 auto;
 }
+.box-overlap {
+    display: none;
+    position: absolute;
+    width: 80%;
+    height: 60vh;
+    background-color: rgba(0,0,0,0.8);
+}
+
 .box {
+    float: left;
     display: flex;
     flex-direction: column;
     background-color: antiquewhite;
@@ -52,9 +63,20 @@ h1{
 }
 
 button {
-    display: none;
+    display: block;
     width: 25%;
     height: 8vh;
     font-size: 24px;
-    margin: 0 auto
+    margin: 24vh auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .box {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    .box-overlap {
+        width: 100%;
+    }
 }

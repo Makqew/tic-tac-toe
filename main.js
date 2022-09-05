@@ -1,26 +1,25 @@
 let arr = ['-','-','-','-','-','-','-','-','-'];
 let joinedArr = arr.join('');
 let playerOrder = document.getElementById('players');
-console.log(playerOrder)
-const player = (order, name, sign) => {
-    return { order, name, sign };
-};
 let i = 0;
 
-const playerOne = player(1, 'Player 1', 'x');
-const playerTwo = player(2, 'Player 2', 'o');
-// console.log(playerOne.name);
+
+const player = (order, name, sign,winCondition) => {
+    return { order, name, sign, winCondition };
+};
+
 
 // if (xxx --- ---) or (--- xxx ---) or (--- --- xxx) 
 // or (x-- -x- --x) or (--x -x- x--)
 // or (x-- x-- x--) or (-x- -x- -x-) or (--x --x --x)
-let winOne = /xxx.{6}|.{3}xxx.{3}|.{6}xxx|x.{3}x.{3}x|.{2}x.x.x.{2}|x.{2}x.{2}x.{2}|.x.{2}x.{2}x.|.{2}x.{2}x.{2}x/;
-let winTwo = /ooo.{6}|.{3}ooo.{3}|.{6}ooo|o.{3}o.{3}o|.{2}o.o.o.{2}|o.{2}o.{2}o.{2}|.o.{2}o.{2}o.|.{2}o.{2}o.{2}o/;
-console.log(winOne.test(joinedArr));
+const answer1 = prompt('Player one, whats your name?');
+const answer2 = prompt('Player two, whats your name?');
+const playerOne = player(1, answer1, 'x', /xxx.{6}|.{3}xxx.{3}|.{6}xxx|x.{3}x.{3}x|.{2}x.x.x.{2}|x.{2}x.{2}x.{2}|.x.{2}x.{2}x.|.{2}x.{2}x.{2}x/);
+const playerTwo = player(2, answer2, 'o', /ooo.{6}|.{3}ooo.{3}|.{6}ooo|o.{3}o.{3}o|.{2}o.o.o.{2}|o.{2}o.{2}o.{2}|.o.{2}o.{2}o.|.{2}o.{2}o.{2}o/);
 
-// every odd number player1 makes a move
-function placeSign(event) {
-    
+
+const gameBoard = (() => {
+    const placeSign = (event) => {
     if(i < 9) {
         if(i%2 === 0 ){
             if(event.currentTarget.innerHTML != 'o' && event.currentTarget.innerHTML != 'x'){
@@ -44,7 +43,7 @@ function placeSign(event) {
                 } else if( event.currentTarget.classList.contains('a8') === true){
                     arr.splice(8, 1, playerOne.sign);
                 }
-                playerOrder.innerHTML = playerTwo.name + ' ' + playerTwo.sign;
+                playerOrder.innerHTML = playerTwo.name + ' — ' + playerTwo.sign;
                 ++i;
             }
             
@@ -70,42 +69,42 @@ function placeSign(event) {
                 } else if( event.currentTarget.classList.contains('a8') === true){
                     arr.splice(8, 1, playerTwo.sign);
                 }
-                playerOrder.innerHTML = playerOne.name + ' ' + playerOne.sign;
+                playerOrder.innerHTML = playerOne.name + ' — ' + playerOne.sign;
                 ++i;
             }
         }
     } 
     joinedArr = arr.join('');
 
-    if(winOne.test(joinedArr) === true){
-        alert('player1 wins');
-        $('button').show();
-    } else if(winTwo.test(joinedArr) === true) {
-        alert('player2 wins');
-        $('button').show();
+    if(playerOne.winCondition.test(joinedArr) === true){
+        playerOrder.innerHTML = playerOne.name + " wins!!!";
+        $('.box-overlap').show();
+    } else if(playerTwo.winCondition.test(joinedArr) === true) {
+        playerOrder.innerHTML = playerTwo.name + " wins!!!";
+        $('.box-overlap').show();
     } else if(i === 9){
-        alert('draw');
-        $('button').show();
+        playerOrder.innerHTML = " DRAW!!!";
+        $('.box-overlap').show();
     }
     console.log(arr)
     console.log(i);
     
-}
+    };
+    const reset = () => {
+        for( let k = 0; k < cell.length; k++){
+            cell[k].innerHTML = '';
+            i = 0;
+            arr = ['-','-','-','-','-','-','-','-','-'];
+            playerOrder.innerHTML = playerOne.name + ' ' + playerOne.sign;
+            $('.box-overlap').hide();
+        }
+    }
+    return {placeSign, reset};
+})();
 
 
 
 let cell = $('.column');
 for( let j = 0; j < cell.length; j++){
-    cell[j].addEventListener('click', placeSign);
-}
-
-
-function reset() {
-    for( let k = 0; k < cell.length; k++){
-        cell[k].innerHTML = '';
-        i = 0;
-        arr = ['-','-','-','-','-','-','-','-','-'];
-        playerOrder.innerHTML = playerOne.name + ' ' + playerOne.sign;
-        $('button').hide();
-    }
+    cell[j].addEventListener('click', gameBoard.placeSign);
 }

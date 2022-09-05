@@ -9,10 +9,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-    <h1>Tic tac toe</h1>
+    <h1>Tic tac toe game</h1>
     <div id="wrapper">
-        <div id="players">Player 1 x</div>
+        <div id="players">Let the battle begin!!!</div>
         <div class="box">
+            <div class="box-overlap">
+                <button onclick="gameBoard.reset()">Reset
+            </button></div>
             <div class="row">
                 <div class="column a0"></div>
                 <div class="column a1"></div>
@@ -29,8 +32,6 @@
                 <div class="column a8"></div>
             </div>
         </div>
-        <button onclick="reset()">Reset
-        </button>
     </div>
     <script src="main.js"></script>
 </body>
