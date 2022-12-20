@@ -86,9 +86,9 @@ const gameBoard = (() => {
         playerOrder.innerHTML = " DRAW!!!";
         $('.box-overlap').show();
     }
-    console.log(arr)
+
+    console.log(arr);
     console.log(i);
-    
     };
     const reset = () => {
         for( let k = 0; k < cell.length; k++){
